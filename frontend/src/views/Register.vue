@@ -2,21 +2,25 @@
     <div class="full">
   <div class="login">
     <h1 class="header main-header">Mia Lexi</h1>
-    <h2>Login</h2>
+    <h2>New User?</h2>
+    <li>
+        <a><router-link to="/login"><u>Already have an account? Log in.</u></router-link></a>
+        </li>
         <input id="username" v-model="state.username" placeholder="Username">
         <br>
         <input id="password" type="password" v-model="state.password" placeholder="Password">
         <br>
-        <button class="button button-login" type="submit" @click="checkLogin">Log in</button>
-    <div v-if="state.wrongInfo" id="wrong">
-        <p>Wrong username or password try again</p>
+        <button class="button button-login" type="submit" @click="goRegister">Create Account</button>
+    <div v-if="state.usernameExists" id="wrong">
+        <p>Username already exists</p>
     </div>
-        <li>
-        <a><router-link to="/register"><u>Don't have an account? Create one.</u></router-link></a>
-        </li>
-        <li>
-        <a><router-link to="/"><u>Continue without logging in.</u></router-link></a>
-        </li>
+    <div v-if="state.usernameWrong" id="wrong">
+        <p>Invalid username</p>
+    </div>
+    <div v-if="state.passwordWrong" id="wrong">
+        <p>Invalid password</p>
+    </div>
+        
   </div>
   </div>
 </template>
@@ -25,22 +29,32 @@
 import { defineComponent, reactive, onMounted } from 'vue';
 import router from '@/router';
 import store from '@/store';
-import { UserService } from "@/services";
+import { UserService } from '@/services';
 export default defineComponent({
   name: 'Login',
   setup() {
       const state = reactive({
-          wrongInfo: false,
           username: '',
-          password: ''
+          password: '',
+          usernameExists: false,
+          usernameWrong: false,
+          passwordWrong: false
       })
-      const checkLogin = () => {
-          if (UserService.login(state.username, state.password)) {
-                store.commit('login');
-                router.push('/'); 
+      const goRegister = () => {
+          state.usernameExists = false;
+          state.usernameWrong = false;
+          state.passwordWrong = false;
+          if (state.username.length < 4) {
+              state.usernameWrong = true;
+          }
+          else if (state.password.length < 6) {
+              state.passwordWrong = true;
+          }
+          else if (UserService.register(state.username, state.password)) {
+              router.push('/login');
           }
           else {
-              state.wrongInfo = true;
+              state.usernameExists = true;
           }
       }
       onMounted(() => {
@@ -48,7 +62,7 @@ export default defineComponent({
               router.push('/');
           }
       });
-      return { checkLogin, state };
+      return { goRegister, state };
   }
 });
 </script>

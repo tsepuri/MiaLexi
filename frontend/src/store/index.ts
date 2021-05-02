@@ -1,5 +1,5 @@
-import Vue from 'vue';
 import { createStore } from 'vuex'
+import { UserService } from "@/services";
 // import { postService } from "@/services";
 export default createStore({
   state: {
