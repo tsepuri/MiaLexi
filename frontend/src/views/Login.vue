@@ -15,7 +15,7 @@
         <a><router-link to="/register"><u>Don't have an account? Create one.</u></router-link></a>
         </li>
         <li>
-        <a><router-link to="/"><u>Continue without logging in.</u></router-link></a>
+        <a><router-link to="/inprogress"><u>Continue without logging in.</u></router-link></a>
         </li>
   </div>
   </div>
@@ -34,9 +34,10 @@ export default defineComponent({
           username: '',
           password: ''
       })
-      const checkLogin = () => {
-          if (UserService.login(state.username, state.password)) {
-                store.commit('login');
+      const checkLogin = async () => {
+          let loggedIn:boolean = await UserService.login(state.username, state.password);
+          if (loggedIn) {
+                store.commit('login', state.username);
                 router.push('/'); 
           }
           else {

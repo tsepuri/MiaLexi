@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8081")
 @RequestMapping("/users")
 public class UsersController {
 
+    @GetMapping(value = "/")
+    public String index() {
+        return "index";
+    }
 	/** The JPA repository */
     @Autowired
     private UserJpaRepository userJpaRepository;
@@ -22,13 +25,12 @@ public class UsersController {
 	 * 
 	 * @return list of {@link User}
 	 */
-    @CrossOrigin(origins = "http://localhost:8081")
     @GetMapping(value = "/all")
     public List<User> findAll() {
         return userJpaRepository.findAll();
     }
 
-    @GetMapping(value = "/{username}/level")
+    @CrossOrigin("http://localhost:8081")
     @ResponseBody
     public Integer findLevel(@PathVariable final String username) {
         User user = userJpaRepository.findByUsername(username);
@@ -40,8 +42,9 @@ public class UsersController {
         }
     }
     
-    @CrossOrigin(origins = "http://localhost:8081")
+    @CrossOrigin("http://localhost:8081")
     @PostMapping(value = "/login")
+    @ResponseBody
     public boolean login(@RequestBody final User user) {
         if (findAll().stream().anyMatch(u -> (u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword())))) {
             return true;
@@ -54,8 +57,9 @@ public class UsersController {
 	 * @param users refers to the User needs to be saved
 	 * @return the {@link User} created
 	 */
-    @CrossOrigin(origins = "http://localhost:8081")
+    @CrossOrigin("http://localhost:8081")
     @PostMapping(value = "/register")
+    @ResponseBody
     public boolean register(@RequestBody final User user) {
         user.setLevel(1);
         if (findAll().stream().anyMatch(u -> u.getUsername().equals(user.getUsername()))) {

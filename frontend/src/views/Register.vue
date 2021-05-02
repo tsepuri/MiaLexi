@@ -40,7 +40,7 @@ export default defineComponent({
           usernameWrong: false,
           passwordWrong: false
       })
-      const goRegister = () => {
+      const goRegister = async () => {
           state.usernameExists = false;
           state.usernameWrong = false;
           state.passwordWrong = false;
@@ -50,11 +50,14 @@ export default defineComponent({
           else if (state.password.length < 6) {
               state.passwordWrong = true;
           }
-          else if (UserService.register(state.username, state.password)) {
-              router.push('/login');
-          }
           else {
-              state.usernameExists = true;
+              let registered:boolean = await UserService.register(state.username, state.password);
+              if (registered) {
+                  router.push('/login');
+              }
+              else {
+                    state.usernameExists = true;
+              }
           }
       }
       onMounted(() => {

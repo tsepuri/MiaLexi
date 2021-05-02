@@ -10,9 +10,9 @@ export default createStore({
           state.user = '';
           localStorage.removeItem('user-token');
       },
-      login(state) {
-          localStorage.setItem('user-token', 'Tarun');
-          state.user = 'Tarun';
+      login(state, user) {
+          localStorage.setItem('user-token', user);
+          state.user = user;
       }
   },
   getters: {

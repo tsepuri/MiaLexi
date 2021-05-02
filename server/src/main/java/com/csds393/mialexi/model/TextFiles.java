@@ -1,12 +1,9 @@
 package com.csds393.mialexi.model;
-import javax.persistence.Lob;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 public class TextFiles {
-    @Lob
-    private Blob text;
     private String fileName;
     private String username;
     private int index;
@@ -27,14 +24,6 @@ public class TextFiles {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(Blob text) {
-        this.text = text;
     }
 
     public String getUsername() {

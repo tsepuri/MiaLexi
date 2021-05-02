@@ -5,6 +5,8 @@ export const UserService = {
     const result:boolean = await api.post('/users/register', {
         username, password
     })
+    console.log(result);
+    console.log("wow");
     return result
   },
 
@@ -13,6 +15,7 @@ export const UserService = {
     const result:boolean = await api.post('/users/login', {
         username, password
     })
+    console.log(result);
     return result
   }
 
