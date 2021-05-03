@@ -6,7 +6,7 @@
     <a><span class="header">Mia Lexi</span></a>
         </div>
     <div class="rightSide">
-    <li class="username"><span>{{ state.username }}0</span></li>
+    <li class="username"><span>{{ state.username }} </span></li>
     <li id="burger" :class="{'active': state.droppedDown}" @click="toggleDropdown">
         <button type="button" class="burger-button">
             <span class="burger-bar burger-bar--1"></span>
