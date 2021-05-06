@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <h5>Censorship!!</h5>  
+    <h2>Censor Hub</h2> 
+      <li>Censored words added by user</li>
+      <li></li>
   </div>
 </template>
 
@@ -23,6 +25,7 @@ export default defineComponent({
 .home {
   padding: 2rem;
   background-color: #e5e5e5;
+  color: #000;
 }
 textarea {
   width: 30%;

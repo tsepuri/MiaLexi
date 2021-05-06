@@ -17,9 +17,9 @@
       <ul class="dropdown rightSide" v-if="state.droppedDown">
       <li><a><router-link to="/">One Word</router-link></a></li>
       <hr>
-      <li><a><router-link to="/favorites">Practice Mode</router-link></a></li>
+      <li><a><router-link to="/practice">Practice Mode</router-link></a></li>
       <hr>
-      <li><a><router-link to="/favorites">Censorship</router-link></a></li>
+      <li><a><router-link to="/censorship">Censorship</router-link></a></li>
       <hr>
       <a><router-link to="/about">About Us</router-link></a>
       <hr>

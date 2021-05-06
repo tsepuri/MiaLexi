@@ -16,7 +16,7 @@ export default createStore({
       }
   },
   getters: {
-      isLoggedIn: state => state.user != '',
-      username: state => state.user
+      isLoggedIn: state.user != '',
+      username: state.user
   }
 })

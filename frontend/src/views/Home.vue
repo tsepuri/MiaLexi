@@ -84,6 +84,9 @@ export default defineComponent({
           state.word = state.textArray[++state.count]; // concatenate word to the string
           console.log(state.word);
         }
+        else {
+              clearInterval(int);
+            }
         } else {
           clearInterval(int); // when done - clear interval
           complete();
