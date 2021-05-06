@@ -31,6 +31,7 @@ public class UsersController {
     }
 
     @CrossOrigin("http://localhost:8081")
+    @GetMapping(value = "/level")
     @ResponseBody
     public Integer findLevel(@PathVariable final String username) {
         User user = userJpaRepository.findByUsername(username);
@@ -62,7 +63,7 @@ public class UsersController {
     @ResponseBody
     public boolean register(@RequestBody final User user) {
         user.setLevel(1);
-        if (findAll().stream().anyMatch(u -> u.getUsername().equals(user.getUsername()))) {
+        if (userJpaRepository.findByUsername(user.getUsername()) != null) {
             return false;
         }
         userJpaRepository.save(user);
