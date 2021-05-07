@@ -5,7 +5,8 @@ export default createStore({
   state: {
       user: localStorage.getItem('user-token') || '',
       censoredWords: [''],
-      censorWords: false
+      censorWords: false,
+      savedTitles: ['']
   },
   mutations: {
       logout(state) {
@@ -32,12 +33,24 @@ export default createStore({
     },
         toggleCensor(state) {
             state.censorWords = !state.censorWords;
+        },
+        addToSavedTitles(state, savedTitle) {
+            if (state.savedTitles[0] === "") {
+                state.savedTitles = [savedTitle];
+            }
+            else {
+                state.savedTitles.push(savedTitle);
+            }
+        },
+        setSavedTitles(state, savedTitles) {
+            state.savedTitles = savedTitles;
         }
   },
   getters: {
       isLoggedIn: state => state.user != '',
       username: state => state.user,
       censoredWords: state => state.censoredWords,
-      censorWords: state => state.censorWords
+      censorWords: state => state.censorWords,
+      savedTitles: state => state.savedTitles
   }
 })

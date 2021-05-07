@@ -43,9 +43,11 @@ export default defineComponent({
  font-family: 'Solway', sans-serif;
 }
 .router-view {
-  margin-top: 15vh;
+  margin-top: 7rem;
 }
 body {
   background-color: #892727;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 </style>

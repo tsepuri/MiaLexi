@@ -26,3 +26,24 @@
     margin: 5px;
     font-size: 1.3rem;
 }
+.list-head {
+    background-color: #999;
+  }
+  .list {
+    padding: 0.2rem;
+    margin: 0.2rem;
+    cursor: pointer;
+  }
+  .list:hover {
+    background-color: rgb(177, 177, 177);
+  }
+  
+  .clicked {
+    background-color: rgb(177, 177, 177);
+  }
+.page {
+    margin: auto;
+    background-color: #f4f4f4;
+    padding: 0rem 0rem 1rem 0rem;
+    width: 30%;
+  }

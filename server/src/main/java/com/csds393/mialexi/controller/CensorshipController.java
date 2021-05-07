@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.LinkedList;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8081")
 @RequestMapping("/censorship")
 public class CensorshipController {
 
@@ -20,15 +21,6 @@ public class CensorshipController {
     @Autowired
     private CensorshipJpaRepository censorshipJpaRepository;
 
-	/**
-	 * Used to fetch all the users from DB
-	 * 
-	 * @return list of {@link User}
-	 */
-    @GetMapping(value = "/all")
-    public List<Censorship> findAll() {
-        return censorshipJpaRepository.findAll();
-    }
 
     @GetMapping(value = "/{username}")
     public List<String> getUserCensored(@PathVariable final String username) {
@@ -49,4 +41,5 @@ public class CensorshipController {
     public long removeCensoredWord(@RequestBody final Censorship censorship){
         return censorshipJpaRepository.deleteByUsernameAndCensoredWord(censorship.getUsername(), censorship.getCensoredWord());
     }
+   
 }

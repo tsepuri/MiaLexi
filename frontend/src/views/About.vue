@@ -10,7 +10,7 @@
     <br>
     <h4> Our authentication feature allows users to log in and keep track of the readings and/or the words that they have censored from the reading. </h4>
     <br>
-    <h4> Our main goal with MiaLexi is to allow the user to improve their reading speed while making it accessible for users and different educational industires</h4>
+    <h4> Our main goal with MiaLexi is to allow the user to improve their reading speed while making it accessible for users and different educational industries</h4>
     <br>
     <p></p>
   </div>

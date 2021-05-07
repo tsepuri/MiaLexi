@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8081")
 @RequestMapping("/users")
 public class UsersController {
 
@@ -33,7 +34,7 @@ public class UsersController {
     @CrossOrigin("http://localhost:8081")
     @GetMapping(value = "/level")
     @ResponseBody
-    public Integer findLevel(@PathVariable final String username) {
+    public Integer findLevel(@RequestParam final String username) {
         User user = userJpaRepository.findByUsername(username);
         if (user == null) {
             return 1;

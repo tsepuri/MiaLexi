@@ -8,9 +8,9 @@
       </div>
     <div v-if="state.user">
       <div v-if="state.passwordGiven">
-        <ul id="censoredPage">
-        <li id="list-head">Censored words added by user</li>
-        <li class="censored" @click="wordPressed(index)" :class="{ clicked: state.activeIndex === index }" v-for="(word, index) in state.censoredList" :key="index">{{ word }}</li>
+        <ul class="page">
+        <li class="list-head">Censored words added by user</li>
+        <li class="list" @click="wordPressed(index)" :class="{ clicked: state.activeIndex === index }" v-for="(word, index) in state.censoredList" :key="index">{{ word }}</li>
         </ul>
         <div v-if="state.inputting">
           <input v-model="state.newWord" type="text"/><br><button class="button button-two" @click="addNewWord">Submit</button><button class="button button-two" @click="state.inputting = false">Cancel</button>
@@ -46,12 +46,12 @@ export default defineComponent({
       passwordGiven: false,
       wrongPassword: false,
       password: '',
-      checked: false,
       inputting: false,
       newWord: '',
       addWork: true,
       removeWork: true,
-      activeIndex: -1
+      activeIndex: -1,
+      checked: computed(() => store.getters.censorWords)
     })
     const passwordInput = async() => {
       state.passwordGiven = await UserService.login(store.getters.username, state.password)
@@ -132,24 +132,6 @@ li {
   font-size: 1.2rem;
   padding: 2rem;
 }
-#list-head {
-  background-color: #999;
-}
-.censored {
-  padding: 0.2rem;
-  margin: 0.2rem;
-  cursor: pointer;
-}
-.censored:hover {
-  background-color: rgb(177, 177, 177);
-}
-#censoredPage {
-  margin: auto;
-  background-color: #f4f4f4;
-  padding: 0rem 0rem 1rem 0rem;
-  width: 30%;
-}
-.clicked {
-  background-color: rgb(177, 177, 177);
-}
+
+
 </style>
