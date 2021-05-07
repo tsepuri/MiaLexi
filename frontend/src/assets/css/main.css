@@ -18,3 +18,11 @@
     font-family: 'Spartan', sans-serif;
     font-size: 1.4rem;
 }
+.button-two {
+    background-color: #FA9E9E;
+  }
+  input {
+    padding: 1.2rem;
+    margin: 5px;
+    font-size: 1.3rem;
+}

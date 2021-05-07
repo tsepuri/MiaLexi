@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div>
+    <div v-if="state.loggedIn">
       <h1>{{ state.title }}</h1>
       <h1 class="oneWord">{{ state.word}}</h1>
       <button v-if="state.paused" @click = "goLeft" class="button button-two button-small">Left</button>
@@ -25,6 +25,9 @@
       <br>
       </div> 
     </div>  
+    <div v-else>
+      <h1>Log in or create an account to access practice mode.</h1>
+      </div>
      
   </div>
 </template>

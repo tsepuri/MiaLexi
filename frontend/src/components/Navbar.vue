@@ -6,7 +6,8 @@
     <a><span class="header">Mia Lexi</span></a>
         </div>
     <div class="rightSide">
-    <li class="username"><span>{{ state.username }} </span></li>
+    <li v-if="state.loggedIn" class="username"><span>{{ state.username }} </span></li>
+    <li v-else class="create"><a class="regLog"><router-link to="/register"><span><u>Create an account</u></span></router-link></a><u><a class="regLog"><router-link to="/login" class="regLog"><span class="loginSpan"><u>Log in</u></span></router-link></a></u></li>
     <li id="burger" :class="{'active': state.droppedDown}" @click="toggleDropdown">
         <button type="button" class="burger-button">
             <span class="burger-bar burger-bar--1"></span>
@@ -22,8 +23,8 @@
       <li><a><router-link to="/censorship">Censorship</router-link></a></li>
       <hr>
       <a><router-link to="/about">About Us</router-link></a>
-      <hr>
-      <li><a @click="logout">Log out</a></li>
+      <hr v-if="state.loggedIn">
+      <li v-if="state.loggedIn"><a @click="logout">Log out</a></li>
     </ul>
     </div>
     </div>
@@ -33,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, reactive, computed } from 'vue';
 import store from '@/store';
 import router from '@/router';
 export default defineComponent({
@@ -43,18 +44,16 @@ export default defineComponent({
   },
   setup(props) {
     const state = reactive({
-      username: store.getters.username,
+      username: computed(() => store.getters.username),
       fullPage: false,
-      droppedDown: false
+      droppedDown: false,
+      loggedIn: computed(() => store.getters.isLoggedIn)
     });
     const logout = () => {
       store.commit('logout');
       router.push('/login');
     }
     const toggleDropdown = () => {state.droppedDown = !state.droppedDown;};
-    const closeDropdown = () => {
-      state.droppedDown = false;
-    }
     return { state, toggleDropdown, logout };
   }
 });
@@ -63,9 +62,12 @@ export default defineComponent({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-router-link {
-  padding: 1rem;
+
+.regLog {
+  padding: 0rem !important;
+  margin: 0 !important;
 }
+
 .leftSide {
   float: left;
 }
@@ -80,7 +82,7 @@ router-link {
 .rightSide li {
   display: inline-block;
 }
-.router-link-active{
+#nav .dropdown .router-link-active{
   background-color: #c4c4c4;
 }
 #nav {
@@ -105,7 +107,7 @@ router-link {
   color: #fff;
   display: inline-block;
 }
-#nav a:hover{
+#nav .dropdown a:hover{
    background-color: #C4C4C4;
     transition: 200ms;
     transition-timing-function: ease-in;
@@ -113,6 +115,7 @@ router-link {
 hr {
   color: #892727 !important;
 }
+
 .dropdown {
   z-index: 4;
   background-color: #E9E6E6;
@@ -132,9 +135,10 @@ hr {
 }
     .burger-button {
         background-color: transparent;
-        position: relative;
+        position: absolute;
         height: 1.5rem;
-        top: -0.5rem;
+        top: 2rem;
+        right: 6rem;
         width: 2.5rem;
         display: block;
         z-index: 99;
@@ -181,6 +185,14 @@ hr {
     }
     .username {
       margin-top: 0.5rem;
+    }
+    .create {
+      width: 50%;
+      margin-top: -1rem;
+    }
+    .loginSpan {
+      font-size: 0.8rem;
+      padding: 0rem;
     }
 
 

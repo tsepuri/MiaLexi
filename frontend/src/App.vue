@@ -1,6 +1,6 @@
 <template>
   <div>
-  <div v-if ="state.isLoggedIn">
+    <div v-if="pastLogin">
   <Navbar/>
   </div>
   <div class = "router-view">
@@ -10,25 +10,20 @@
 </template>
 <script lang="ts">
 import { defineComponent, reactive, onMounted, computed, onUpdated } from 'vue';
-import store from '@/store';
-import router from '@/router';
+import { useRoute } from 'vue-router';
 import Navbar from '@/components/Navbar.vue';
 export default defineComponent({
   name: 'App',
   setup() {
-    const state = reactive({
-      isLoggedIn: computed(() => store.getters.isLoggedIn),
-      username: computed(() => store.getters.username),
-      
-    })
-    onMounted(
-      () => {
-         if (!state.isLoggedIn) {
-           router.push('/login');
-         }
+    const pastLogin = computed(() => {
+      let name = useRoute().name;
+      if (name != null) {
+        console.log(name);
+        return !name.toString().includes("Register") && !name.toString().includes("Login")
       }
-      );
-      return { state };
+      return false;
+    })
+    return { pastLogin };
   },
   components: {
     Navbar
