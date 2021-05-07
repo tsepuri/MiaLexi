@@ -15,7 +15,7 @@
         <a><router-link to="/register"><u>Don't have an account? Create one.</u></router-link></a>
         </li>
         <li>
-        <a><router-link to="/inprogress"><u>Continue without logging in.</u></router-link></a>
+        <a><router-link to="/"><u>Continue without logging in.</u></router-link></a>
         </li>
   </div>
   </div>
@@ -54,11 +54,6 @@ export default defineComponent({
 });
 </script>
 <style scoped>
-    input {
-        padding: 1.2rem;
-        margin: 5px;
-        font-size: 1.3rem;
-    }
     #wrong {
         color: red;
     }

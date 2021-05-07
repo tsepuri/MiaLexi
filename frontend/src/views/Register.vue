@@ -15,10 +15,10 @@
         <p>Username already exists</p>
     </div>
     <div v-if="state.usernameWrong" id="wrong">
-        <p>Invalid username</p>
+        <p>Username needs to be at least 4 letters</p>
     </div>
     <div v-if="state.passwordWrong" id="wrong">
-        <p>Invalid password</p>
+        <p>Password needs to be at least 6 letters</p>
     </div>
         
   </div>

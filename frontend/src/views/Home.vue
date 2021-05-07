@@ -5,8 +5,13 @@
     <br>
     <textarea v-model="state.text" class="biggerText" placeholder="Enter text here"></textarea>
     <br>
-    <button type="submit" class="button button-two" @click="selectFile">Select File</button>
+    <div v-if="state.selectingFile">
+      <input type="file" class="button" @change="previewFiles"><button type="submit" class="button button-two" @click="state.selectingFile = false">Cancel</button>
+      </div>
+    <div v-else>
+    <button type="submit" class="button button-two" @click="state.selectingFile = true">Select File</button>
     <button type="submit" class="button button-two" @click="enterWiki">Enter Wiki</button>
+    </div>
       <br>
     <button type="submit" class="button button-two" @click="onTextInput">Start</button>
     <div class="red" v-if="state.noInputtedText">No inputted text.</div>
@@ -71,7 +76,8 @@ export default defineComponent({
       title: '',
       completed: false,
       noInputtedText: false,
-      noInputtedTitle: false
+      noInputtedTitle: false,
+      selectingFile: false
     });
     const value1 = ref(50);
     const showWords = () => {
@@ -144,13 +150,16 @@ export default defineComponent({
         state.word = state.textArray[++state.count];
       }
     }
+    const previewFile = (event:any) => {
+      console.log(event.target);
+    }
     const selectFile = () => {
       return;
     }
     const enterWiki = () => {
       return;
     }
-    return { state, onTextInput, togglePause, goLeft, goRight, value1, selectFile, enterWiki, newText, startOver };
+    return { state, onTextInput, togglePause, previewFile, goLeft, goRight, value1, selectFile, enterWiki, newText, startOver };
   },
   components: {
     VueSlider
@@ -173,9 +182,7 @@ export default defineComponent({
 textarea {
   width: 30%;
 }
-.button-two {
-  background-color: #FA9E9E;
-}
+
 .oneWord {
   color: #000;
   font-size: 3rem;
