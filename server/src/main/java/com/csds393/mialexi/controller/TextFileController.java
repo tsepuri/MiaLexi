@@ -48,9 +48,14 @@ public class TextFileController {
     @PostMapping(value = "/updateIndex")
     public boolean updateIndex(@RequestBody final TextFile textFile) {
         TextFile text = textFileJpaRepository.findByUsernameAndFileName(textFile.getUsername(), textFile.getFileName());
-        text.setIndex(textFile.getIndex());
-        textFileJpaRepository.save(text);
-        return true;
+        if (text == null) {
+            return false;
+        }
+        else {
+            text.setIndex(textFile.getIndex());
+            textFileJpaRepository.save(text);
+            return true;
+        }
     }
     
     ///@PostMapping(value = "/remove")
