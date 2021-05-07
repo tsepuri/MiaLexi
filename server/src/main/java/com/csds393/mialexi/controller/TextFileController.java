@@ -34,9 +34,9 @@ public class TextFileController {
 
     @PostMapping(value = "/add")
     public boolean addTextFile(@RequestBody final TextFile textFile){
-        
         textFileJpaRepository.save(textFile);
         return true;
+        
     } 
 
     @GetMapping(value = "/get")

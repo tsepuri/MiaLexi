@@ -31,7 +31,6 @@ public class UsersController {
         return userJpaRepository.findAll();
     }
 
-    @CrossOrigin("http://localhost:8081")
     @GetMapping(value = "/level")
     @ResponseBody
     public Integer findLevel(@RequestParam final String username) {
@@ -43,15 +42,25 @@ public class UsersController {
             return user.getLevel();
         }
     }
-    
-    @CrossOrigin("http://localhost:8081")
+
+   
+    @PostMapping(value = "/updateLevel")
+    public boolean updateLevel(@Requestbody final User user) {
+        User user1 = userJpaRepository.findByUsername(user.getUsername());
+        user1.setLevel(user.getLevel())
+        userJpaRepository.save(user1)
+        return true
+    }
+
     @PostMapping(value = "/login")
     @ResponseBody
     public boolean login(@RequestBody final User user) {
         if (findAll().stream().anyMatch(u -> (u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword())))) {
             return true;
         }
-        return false;
+       else{ 
+           return false;
+        }
     }
     /**
 	 * Used to create a User in the DB
@@ -59,7 +68,6 @@ public class UsersController {
 	 * @param users refers to the User needs to be saved
 	 * @return the {@link User} created
 	 */
-    @CrossOrigin("http://localhost:8081")
     @PostMapping(value = "/register")
     @ResponseBody
     public boolean register(@RequestBody final User user) {
@@ -67,7 +75,9 @@ public class UsersController {
         if (userJpaRepository.findByUsername(user.getUsername()) != null) {
             return false;
         }
-        userJpaRepository.save(user);
-        return true;
+        else{ 
+            userJpaRepository.save(user);
+            return true;
+        }
     }
 }
