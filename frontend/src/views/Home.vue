@@ -25,13 +25,16 @@
       <div>
       <h1>{{ state.title }}</h1>
       <h1 :style="`font-size: ${state.font}px`" class="oneWord">{{ state.word}}</h1>
-      <button v-if="state.paused" @click = "goLeft" class="button button-two button-small">Left</button>
-      <button type="submit" class="button button-two" :class="[state.paused ? 'pausedButton' : '']" @click="togglePause">{{state.paused ? 'Resume' : 'Pause'}}</button>
-      <button v-if="state.paused" @click = "goRight" class="button button-two button-small">Right</button>
+      <button v-if="state.paused && state.text.length" @click = "goLeft" class="button button-two button-small">Left</button>
+      <button type="submit" v-if="state.text.length" class="button button-two" :class="[state.paused ? 'pausedButton' : '']" @click="togglePause">{{state.paused ? 'Resume' : 'Pause'}}</button>
+      <button v-if="state.paused && state.text.length" @click = "goRight" class="button button-two button-small">Right</button>
       <br>
-      <button v-if="state.paused" class="button button-two button-save" @click="saveInPlace">Save in place</button>
+      <button v-if="state.paused && state.text.length" class="button button-two button-save" @click="saveInPlace">Save in place</button>
       <br>
-      <div class="sliders">
+      <p class="red" v-if="state.fileTooBig">File too big to save</p>
+      <p class="red" v-if="state.saveLoggedOut">Login to save in place</p>
+      <br>
+      <div class="sliders" v-if="state.text.length">
         <div>
       <h5>{{state.speed}} WPM</h5>
       <div v-if="!state.paused">Pause to change speed</div>
@@ -51,8 +54,8 @@
       </div>
       </div>
       </div>
-      <button type="submit" class="button button-two" @click="newText">Input New Text</button> <button type="submit" class="button button-two pausedButton" @click="startOver">Start Over</button>
-    <div v-if="state.completed" class="completedDiv">Text has been completed
+      <button type="submit" class="button button-two" @click="newText">Input New Text</button> <button v-if="state.text.length" type="submit" class="button button-two pausedButton" @click="startOver">Start Over</button>
+    <div v-if="state.completed && state.text.length" class="completedDiv">Text has been completed
       <br>
       </div> 
       </div>
@@ -69,7 +72,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, computed } from 'vue';
+import { defineComponent, reactive, ref, computed, onMounted } from 'vue';
 import VueSlider from 'vue-slider-component'
 import store from '@/store';
 import { TextService } from '@/services';
@@ -98,7 +101,9 @@ export default defineComponent({
       file: null,
       activeIndex: -1,
       loggedIn: store.getters.isLoggedIn,
-      savedList: computed(() => store.getters.savedTitles)
+      savedList: computed(() => store.getters.savedTitles),
+      saveLoggedOut: false,
+      fileTooBig: false
     });
     const titlePressed = (index:number) => {
       console.log(index);
@@ -127,6 +132,11 @@ export default defineComponent({
       }
        
     }
+    onMounted(() => {
+          if (state.loggedIn && state.savedList[0] !== "") {
+              state.textInput = true;
+          }
+      });
     const value1 = ref(50);
     const showWords = () => {
       const interval = 60000/(state.speed);
@@ -155,6 +165,8 @@ export default defineComponent({
     }
     const newText = () => {
       state.completed = false;
+      state.saveLoggedOut = false;
+      state.fileTooBig = false;
       state.textInput = false;
       state.enteringWiki = false;
       state.count = -1;
@@ -164,6 +176,8 @@ export default defineComponent({
     const startOver = () => {
       state.count = -1;
       state.completed = false;
+      state.saveLoggedOut = false;
+      state.fileTooBig = false;
       state.startedOver = true;
       state.paused = true;
       onTextInput();
@@ -231,6 +245,8 @@ export default defineComponent({
       
     }
     const togglePause = () => {
+      state.saveLoggedOut = false;
+      state.fileTooBig = false;
       state.paused = !state.paused;
       if (!state.paused) {
         showWords();
@@ -256,10 +272,18 @@ export default defineComponent({
       }
     }
     const saveInPlace = async() => {
-      if (!state.savedList.includes(state.title)) {
+      if (!state.loggedIn) {
+        state.saveLoggedOut = true;
+      }
+      else if (!state.savedList.includes(state.title)) {
         console.log(state.text);
+        try {
         await TextService.save(state.title, state.count, state.text);
         store.commit('addToSavedTitles', state.title);
+        }
+        catch (err) {
+          state.fileTooBig = true;
+        }
       }
       else {
         await TextService.updateIndex(state.title, state.count);

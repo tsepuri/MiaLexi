@@ -45,11 +45,16 @@ public class UsersController {
 
    
     @PostMapping(value = "/updateLevel")
-    public boolean updateLevel(@Requestbody final User user) {
+    public boolean updateLevel(@RequestBody final User user) {
         User user1 = userJpaRepository.findByUsername(user.getUsername());
-        user1.setLevel(user.getLevel())
-        userJpaRepository.save(user1)
-        return true
+        if (user1 == null) {
+            return false;
+        }
+        else {
+            user1.setLevel(user.getLevel());
+            userJpaRepository.save(user1);
+            return true;
+        }
     }
 
     @PostMapping(value = "/login")

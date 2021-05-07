@@ -17,6 +17,23 @@ export const UserService = {
     })
     console.log(result);
     return result
+  },
+
+  async updateLevel (username:string, level:string) {
+    const result:boolean = await api.post('/users/updateLevel', {
+      username, level
+    })
+    console.log(result);
+    return result;
+  },
+  async level (username:string):Promise<number> {
+    const result:number = await api.get('/users/level', {
+      params: {
+        username
+      }
+    });
+    console.log(result);
+    return result;
   }
 
 }
