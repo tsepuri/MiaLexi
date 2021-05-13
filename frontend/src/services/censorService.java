@@ -60,6 +60,9 @@ public static String result = "";
             else if ((word+"\"").compareTo(i.toLowerCase().trim())==0){
             wordList.set(index, asterisk + "\""); 
            }
+           else if ((word+"es").compareTo(i.toLowerCase().trim())==0){
+            wordList.set(index, asterisk + "es"); 
+           }
             else if (("\""+word+"\"").compareTo(i.toLowerCase().trim())==0){
             wordList.set(index, "\""+asterisk+"\""); 
            }
@@ -74,7 +77,7 @@ public static String result = "";
   
 public static void main(String[] args) throws FileNotFoundException
 {
-    String cen = "cen";//User picks censored word
+    String cen = "Jack";//User picks censored word
     censor(cen);
     System.out.println(result);
     String fileOutput = "output.txt";//Name of the output file
