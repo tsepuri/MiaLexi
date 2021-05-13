@@ -30,6 +30,7 @@
                     </goals>
                     <configuration>
                         <nodeVersion>v10.10.0</nodeVersion>
+                        <npmVersion>7.12.1</npmVersion>
                     </configuration>
                 </execution>
                 <!-- Install all project dependencies -->
