@@ -14,7 +14,7 @@ public class TextFile {
     private int index;
 
     //@Basic(fetch=FetchType.LAZY)
-    @Column(columnDefinition = "TEXT", length = 8192)
+    @Column(columnDefinition="LONGTEXT")
     private String fileContent;
     
 
