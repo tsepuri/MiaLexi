@@ -2,6 +2,10 @@ package com.csds393.mialexi.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+
+import org.hibernate.annotations.Type;
+
 import javax.persistence.Column;
 
 @Entity
@@ -11,7 +15,8 @@ public class TextFile {
     private String username;
     private int index;
     
-    @Column(length=511,columnDefinition="TEXT")
+    @Lob
+    @Type(type = "org.hybernate.type.TextType")
     private String fileContent;
     
     @Id
