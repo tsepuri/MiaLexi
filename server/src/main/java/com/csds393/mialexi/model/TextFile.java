@@ -15,8 +15,7 @@ public class TextFile {
     private String username;
     private int index;
     
-    @Lob
-    @Type(type = "org.hibernate.type.TextType")
+    @Column(columnDefinition = "TEXT")
     private String fileContent;
     
     @Id
