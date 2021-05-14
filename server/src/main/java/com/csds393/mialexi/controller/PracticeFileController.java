@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/PracticeFile")
 public class PracticeFileController {
 
-    int numPracticeFiles = 4;
 
     @GetMapping(value = "/")
     public String index() {
@@ -33,13 +32,14 @@ public class PracticeFileController {
     @GetMapping(value = "/get")
     public String getTextFiles(){
         Random random = new Random();
-        int index = random.nextInt(numPracticeFiles);
+        int index = random.nextInt(PracticeFileJpaRepository.findAll().size());
         String practiceFiles = PracticeFileJpaRepository.findByIndex(index).getFileContent();
         return practiceFiles;
     }
 
     @PostMapping(value = "/add")
     public boolean addPracticeFile(@RequestBody final PracticeFile practiceFile){
+        practiceFile.setIndex(PracticeFileJpaRepository.findAll().size());
         PracticeFileJpaRepository.save(practiceFile);
         return true;
     }
