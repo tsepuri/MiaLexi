@@ -13,14 +13,13 @@ public class TextFile {
     private String username;
     private int index;
 
-    //@Basic(fetch=FetchType.LAZY)
-    @Column(columnDefinition="LONGTEXT")
+    @Lob
     private String fileContent;
     
-
-    private long id;
     @Id
     @GeneratedValue
+    private long id;
+    
     public Long getId() {
         return id;
     }
