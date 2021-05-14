@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public interface TextFileJpaRepository extends JpaRepository<TextFile, Long>{
 
-    List<TextFile> findAllByUsername(String username);
+    List<TextFile> findByUsername(String username);
 
     ////@Transactional 
     //long deleteByUsernameAndCensoredWord(@Param("username") String username, @Param("censoredWord") String censoredWord);

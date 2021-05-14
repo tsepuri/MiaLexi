@@ -26,7 +26,7 @@
       </div>
       </div>
       </div>
-       <button type="submit" class="button button-two pausedButton" @click="startOver">Start Over</button>
+       <button v-if="!state.levelCompleted" type="submit" class="button button-two pausedButton" @click="startOver">Start Over</button>
       <br>
     </div>  
     <div v-else>
@@ -155,16 +155,20 @@ export default defineComponent({
         state.textArray = state.text.split(" ");
         state.word = state.textArray[++state.count];
         showWords();
-        console.log("What?");
     }
     const togglePause = () => {
       if (state.levelCompleted) {
         state.levelCompleted = false;
+        state.count = -1;
         setTextTitle(5);
+        onTextInput();
       }
-      state.paused = !state.paused;
-      if (!state.paused) {
+      else if (state.paused) {
+       state.paused = !state.paused;
        showWords();
+      }
+      else {
+        state.paused = !state.paused;
       }
     }
     const goLeft = () => {

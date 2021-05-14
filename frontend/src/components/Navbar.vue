@@ -49,6 +49,9 @@ export default defineComponent({
       droppedDown: false,
       loggedIn: computed(() => store.getters.isLoggedIn)
     });
+    router.beforeEach((to, from) => {
+      state.droppedDown = true;
+    })
     const logout = () => {
       store.commit('logout');
       router.push('/login');

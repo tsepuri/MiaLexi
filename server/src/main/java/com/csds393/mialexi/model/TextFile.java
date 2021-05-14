@@ -12,7 +12,7 @@ public class TextFile {
     private int index;
 
     @Lob
-    @Column(length = 1024)
+    @Column
     private String fileContent;
 
     private long id;

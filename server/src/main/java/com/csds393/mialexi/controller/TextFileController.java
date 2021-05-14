@@ -24,7 +24,7 @@ public class TextFileController {
 
     @GetMapping(value = "/{username}")
     public List<String> getTextFiles(@PathVariable final String username) {
-        List<TextFile> textFiles = textFileJpaRepository.findAllByUsername(username);
+        List<TextFile> textFiles = textFileJpaRepository.findByUsername(username);
         List<String> stringFiles = new LinkedList<String>();
         for (TextFile textFile : textFiles) {
             stringFiles.add(textFile.getFileName());

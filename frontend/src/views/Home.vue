@@ -26,8 +26,8 @@
       <h1>{{ state.title }}</h1>
       <h1 :style="`font-size: ${state.font}px`" class="oneWord">{{ state.word}}</h1>
       <button v-if="state.paused && state.text.length" @click = "goLeft" class="button button-two button-small">Left</button>
-      <button type="submit" v-if="state.text.length" class="button button-two" :class="[state.paused ? 'pausedButton' : '']" @click="togglePause">{{state.paused ? 'Resume' : 'Pause'}}</button>
-      <button v-if="state.paused && state.text.length" @click = "goRight" class="button button-two button-small">Right</button>
+      <button type="submit" v-if="state.text.length && !state.completed" class="button button-two" :class="[state.paused ? 'pausedButton' : '']" @click="togglePause">{{state.paused ? 'Resume' : 'Pause'}}</button>
+      <button v-if="state.paused && state.text.length && !state.completed" @click = "goRight" class="button button-two button-small">Right</button>
       <br>
       <button v-if="state.paused && state.text.length" class="button button-two button-save" @click="saveInPlace">Save in place</button>
       <br>
@@ -132,8 +132,11 @@ export default defineComponent({
       }
        
     }
-    onMounted(() => {
-          if (state.loggedIn && state.savedList[0] !== "") {
+    onMounted(async () => {
+          if (state.savedList[0] == "") {
+            await TextService.addListToStore();
+          }
+          if (state.loggedIn && state.savedList.length > 0) {
               state.textInput = true;
           }
       });
@@ -158,6 +161,11 @@ export default defineComponent({
         }
       }, interval)
     }
+    const setDefaultVals = () => {
+      state.saveLoggedOut = false;
+      state.fileTooBig = false;
+      state.enteringWiki = false;
+    }
     const complete = () => {
       state.completed = true;
       state.word = '';
@@ -165,8 +173,7 @@ export default defineComponent({
     }
     const newText = () => {
       state.completed = false;
-      state.saveLoggedOut = false;
-      state.fileTooBig = false;
+      setDefaultVals();
       state.textInput = false;
       state.enteringWiki = false;
       state.count = -1;
@@ -176,8 +183,7 @@ export default defineComponent({
     const startOver = () => {
       state.count = -1;
       state.completed = false;
-      state.saveLoggedOut = false;
-      state.fileTooBig = false;
+      setDefaultVals();
       state.startedOver = true;
       state.paused = true;
       onTextInput();
@@ -245,8 +251,7 @@ export default defineComponent({
       
     }
     const togglePause = () => {
-      state.saveLoggedOut = false;
-      state.fileTooBig = false;
+      setDefaultVals();
       state.paused = !state.paused;
       if (!state.paused) {
         showWords();
@@ -312,7 +317,6 @@ export default defineComponent({
 textarea {
   width: 30%;
 }
-
 .oneWord {
   color: #000;
   background-color: #F4EEEE;

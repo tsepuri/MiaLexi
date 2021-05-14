@@ -3,6 +3,8 @@ package com.csds393.mialexi.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Column;
+
 
 @Entity
 public class User {
@@ -10,6 +12,7 @@ public class User {
     private Long id;
     private String username;
     private String password;
+    @Column(name = "_level")
     private Integer level;
     @Id
     @GeneratedValue

@@ -9,12 +9,26 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, onMounted, computed, onUpdated } from 'vue';
+import { defineComponent, reactive, computed, onUpdated } from 'vue';
 import { useRoute } from 'vue-router';
+import router from '@/router';
+import store from '@/store';
 import Navbar from '@/components/Navbar.vue';
 export default defineComponent({
   name: 'App',
   setup() {
+    const state = reactive({
+      firstTime: true
+    });
+    router.beforeEach((to, from) => {
+      if (!from.name && !store.getters.isLoggedIn && !state.firstTime) {
+        state.firstTime = false;
+        router.push('/login');
+      }
+      else {
+        state.firstTime = false;
+      }
+    })
     const pastLogin = computed(() => {
       let name = useRoute().name;
       if (name != null) {

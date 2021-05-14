@@ -11,6 +11,8 @@ export default createStore({
   mutations: {
       logout(state) {
           state.user = '';
+          state.censoredWords = [''];
+          state.savedTitles = [''];
           localStorage.removeItem('user-token');
       },
       login(state, user) {
