@@ -19,9 +19,9 @@ export const UserService = {
     return result
   },
 
-  async updateLevel (username:string, level:string) {
+  async updateLevel (username:string, practiceLevel:string) {
     const result:boolean = await api.post('/users/updateLevel', {
-      username, level
+      username, practiceLevel
     })
     console.log(result);
     return result;
