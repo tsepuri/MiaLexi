@@ -13,7 +13,7 @@ public class TextFile {
     private String username;
     private int index;
 
-    @Lob
+    
     private String fileContent;
     
     @Id

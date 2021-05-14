@@ -287,7 +287,6 @@ export default defineComponent({
         store.commit('addToSavedTitles', state.title);
         }
         catch (err) {
-          console.log(err);
           state.fileTooBig = true;
         }
       }
