@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 public interface PracticeFileJpaRepository extends JpaRepository<PracticeFile, Long> {
 
-    PracticeFile findByname(int name);
+    PracticeFile findByIndex(int index);
         
 }

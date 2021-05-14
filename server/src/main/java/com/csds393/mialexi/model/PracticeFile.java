@@ -13,7 +13,7 @@ public class PracticeFile {
     @GeneratedValue
     private long id;
 
-    private int name;
+    private int index;
 
     @Column(columnDefinition = "TEXT")
     private String fileContent;
@@ -26,12 +26,12 @@ public class PracticeFile {
         this.id=id;
     }
 
-    public int getName() {
-        return name;
+    public int getIndex() {
+        return index;
     }
     
-    public void setName(int name) {
-        this.name=name;
+    public void setIndex(int index) {
+        this.index=index;
     }
     public String getFileContent(){
         return fileContent;

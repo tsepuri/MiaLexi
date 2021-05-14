@@ -30,11 +30,11 @@ public class PracticeFileController {
 
     
 
-    @GetMapping(value = "/{name}")
-    public String getTextFiles(@PathVariable final String username){
+    @GetMapping(value = "/get")
+    public String getTextFiles(){
         Random random = new Random();
-        int num = random.nextInt(numPracticeFiles);
-        String practiceFiles = PracticeFileJpaRepository.findByname(num).getFileContent();
+        int index = random.nextInt(numPracticeFiles);
+        String practiceFiles = PracticeFileJpaRepository.findByIndex(index).getFileContent();
         return practiceFiles;
     }
 
