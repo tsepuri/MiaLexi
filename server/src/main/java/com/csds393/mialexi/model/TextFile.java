@@ -15,7 +15,7 @@ public class TextFile {
 
     @Lob
     @Basic(fetch=FetchType.LAZY)
-    @Column(columnDefinition = "text", length = 512)
+    @Column(columnDefinition = "text", length = 8192)
     private String fileContent;
 
     private long id;
