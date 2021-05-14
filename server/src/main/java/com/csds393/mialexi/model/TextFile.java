@@ -11,7 +11,7 @@ public class TextFile {
     private String username;
     private int index;
     
-    @Column(length = 512,columnDefinition = "LONGVARCHAR")
+    @Column(length=511,columnDefinition="TEXT")
     private String fileContent;
     
     @Id
