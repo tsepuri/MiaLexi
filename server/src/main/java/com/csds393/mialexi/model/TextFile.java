@@ -13,7 +13,8 @@ public class TextFile {
     private String username;
     private int index;
 
-    
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String fileContent;
     
     @Id
