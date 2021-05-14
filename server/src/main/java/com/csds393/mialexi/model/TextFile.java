@@ -13,7 +13,7 @@ public class TextFile {
     private String username;
     private int index;
     
-    @Column(length = 512)
+    @Column(length = 20)
     private String fileContent;
     
     @Id
