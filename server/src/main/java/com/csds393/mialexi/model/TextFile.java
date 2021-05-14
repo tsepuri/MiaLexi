@@ -13,8 +13,7 @@ public class TextFile {
     private String username;
     private int index;
 
-    @Lob
-    @Basic(fetch=FetchType.LAZY)
+    //@Basic(fetch=FetchType.LAZY)
     @Column(columnDefinition = "TEXT", length = 8192)
     private String fileContent;
     

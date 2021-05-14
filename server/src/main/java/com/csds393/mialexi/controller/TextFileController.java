@@ -34,7 +34,6 @@ public class TextFileController {
     
     @PostMapping(value = "/add")
     public boolean addTextFile(@RequestBody final TextFile textFile){
-        textFile.setFileContent("Apple carrot crocodile Apple carrot crocodile Apple carrot crocodile Apple carrot crocodile Apple carrot crocodile Apple carrot crocodile Apple carrot crocodile Apple carrot crocodile Apple carrot crocodile Apple carrot crocodile Apple carrot crocodile Apple");
         textFileJpaRepository.save(textFile);
         return true;
         
