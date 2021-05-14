@@ -31,10 +31,10 @@ public class TextFileController {
         }
         return stringFiles;
     } 
-
+    
     @PostMapping(value = "/add")
     public boolean addTextFile(@RequestBody final TextFile textFile){
-        textFileJpaRepository.save(textFile);
+        //textFileJpaRepository.save(textFile);
         return true;
         
     } 
