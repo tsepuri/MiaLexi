@@ -31,7 +31,7 @@ class UsersControllerTest {
         user.setUsername("demo");
         user.setPassword("demo123");
         userController.register(user);
-        assertEquals(1, user.getLevel());
+        assertEquals(1, user.getPracticeLevel());
     }
     @Test
     void testRegisterLevel2() {

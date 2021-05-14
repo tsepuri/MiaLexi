@@ -51,7 +51,7 @@ public class UsersController {
             return false;
         }
         else {
-            user1.setLevel(user.getLevel());
+            user1.setPracticeLevel(user.getPracticeLevel());
             userJpaRepository.save(user1);
             return true;
         }
@@ -76,7 +76,7 @@ public class UsersController {
     @PostMapping(value = "/register")
     @ResponseBody
     public boolean register(@RequestBody final User user) {
-        user.setLevel(1);
+        user.setPracticeLevel(1);
         if (userJpaRepository.findByUsername(user.getUsername()) != null) {
             return false;
         }
