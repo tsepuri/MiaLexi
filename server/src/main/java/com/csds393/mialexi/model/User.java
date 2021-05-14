@@ -12,8 +12,8 @@ public class User {
     private Long id;
     private String username;
     private String password;
-    @Column(name = "_level")
-    private Integer level;
+    private Integer practiceLevel;
+    
     @Id
     @GeneratedValue
     public Long getId() {
@@ -40,11 +40,11 @@ public class User {
         this.password = password;
     }
 
-    public Integer getLevel() {
-        return level;
+    public Integer getPracticeLevel() {
+        return practiceLevel;
     }
 
-    public void setLevel(Integer level) {
-        this.level = level;
+    public void setPracticeLevel(Integer practiceLevel) {
+        this.practiceLevel = practiceLevel;
     }
 }

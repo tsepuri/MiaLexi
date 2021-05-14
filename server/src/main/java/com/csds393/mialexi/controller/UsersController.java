@@ -39,7 +39,7 @@ public class UsersController {
             return 1;
         }
         else {
-            return user.getLevel();
+            return user.getPracticeLevel();
         }
     }
 
