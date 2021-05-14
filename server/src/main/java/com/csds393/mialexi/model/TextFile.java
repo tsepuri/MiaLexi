@@ -16,7 +16,7 @@ public class TextFile {
     private int index;
     
     @Lob
-    @Type(type = "org.hybernate.type.TextType")
+    @Type(type = "org.hibernate.type.TextType")
     private String fileContent;
     
     @Id
