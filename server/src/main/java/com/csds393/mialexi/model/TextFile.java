@@ -1,19 +1,17 @@
 package com.csds393.mialexi.model;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 
 @Entity
 public class TextFile {
+  
     private String fileName;
     private String username;
     private int index;
     
-    @Column(length = 20)
+    @Column(length = 512,columnDefinition = "LONGVARCHAR")
     private String fileContent;
     
     @Id
