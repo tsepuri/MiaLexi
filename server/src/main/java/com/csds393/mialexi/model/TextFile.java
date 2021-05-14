@@ -12,8 +12,8 @@ public class TextFile {
     private String fileName;
     private String username;
     private int index;
-
-    @Column(columnDefinition = "TEXT")
+    
+    @Column(length = 512)
     private String fileContent;
     
     @Id
