@@ -21,16 +21,7 @@ public class UsersController {
     @Autowired
     private UserJpaRepository userJpaRepository;
 
-	/**
-	 * Used to fetch all the users from DB
-	 * 
-	 * @return list of {@link User}
-	 */
-    @GetMapping(value = "/all")
-    public List<User> findAll() {
-        return userJpaRepository.findAll();
-    }
-
+	
     @GetMapping(value = "/level")
     @ResponseBody
     public Integer findLevel(@RequestParam final String username) {
