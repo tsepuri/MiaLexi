@@ -20,7 +20,7 @@ Allows you to focus on one word at a time while reading by only showing you one 
 * Clone Git repository
 
  ```
-cd MiaLexi
+cd Mia-Lexi
 cd frontend
 npm install
 
@@ -46,8 +46,12 @@ cd ../server
 cd frontend
 npm run test:unit
 ```
+[while server is running]
 
 * Find backend testing at server/src/test
+
+* Only demo text available in practice mode when you run our code locally
+* If you use the supplied url you can access full practice mode
 
 
 
