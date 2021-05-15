@@ -51,7 +51,7 @@ public class UsersController {
     @PostMapping(value = "/login")
     @ResponseBody
     public boolean login(@RequestBody final User user) {
-        if (findAll().stream().anyMatch(u -> (u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword())))) {
+        if (userJpaRepository.findAll().stream().anyMatch(u -> (u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword())))) {
             return true;
         }
        else{ 
