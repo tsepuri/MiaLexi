@@ -29,7 +29,7 @@ import java.io.BufferedWriter;
 import com.csds393.mialexi.model.TextFile;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin
 @RequestMapping("/textInput")
 public class TextInputController {
     @Value("${app.upload.dir:${user.home}}")

@@ -7,7 +7,10 @@ export const TextService = {
         const result:string = await api.get(`/textInput/wikipedia/${pageName}`);
         return result
       },
-    
+     async getPracticeFile ():Promise<string> {
+       const result:string = await api.get('/PracticeFile/get');
+       return result;
+     },
       async fileInput (file:string):Promise<string> {
         const formData = new FormData();
         formData.append("file", file);
@@ -35,8 +38,7 @@ export const TextService = {
         return result;
       },
       async getAll():Promise<string[]> {
-        const username = store.getters.username;
-        const result:string[] = await api.get(`/textFile/${username}`)
+        const result:string[] = await api.get(`/textFile/${store.getters.username}`)
         return result;
       },
       async getContent(fileName: string):Promise<any> {
@@ -47,11 +49,8 @@ export const TextService = {
         return result;
       },
       async addListToStore() {
-        console.log(store.getters.savedTitles);
-        if (store.getters.savedTitles[0] === "") {
-          console.log("here");
+        if ((store.getters.savedTitles[0] === "" || store.getters.savedTitles.length === 0) && store.getters.username !== '') {
           const savedTitles:string[] = await TextService.getAll();
-          console.log(savedTitles);
           store.commit('setSavedTitles', savedTitles);
         }
       }

@@ -32,7 +32,6 @@ export default defineComponent({
     const pastLogin = computed(() => {
       let name = useRoute().name;
       if (name != null) {
-        console.log(name);
         return !name.toString().includes("Register") && !name.toString().includes("Login")
       }
       return false;

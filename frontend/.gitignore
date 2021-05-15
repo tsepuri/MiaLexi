@@ -3,7 +3,8 @@ node_modules
 /dist
 /node
 /target
-
+coverage
+etc
 # local env files
 .env.local
 .env.*.local

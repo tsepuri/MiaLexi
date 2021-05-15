@@ -16,20 +16,23 @@ export default createStore({
           localStorage.removeItem('user-token');
       },
       login(state, user) {
-          localStorage.setItem('user-token', user);
-          state.user = user;
+            state.user = user;
+          localStorage.setItem('user-token', user); 
       },
       setCensoredWords(state, censoredWords) {
           state.censoredWords = censoredWords;
       },
       addCensoredWord(state, censoredWord) {
-        console.log(censoredWord);
-        state.censoredWords.push(censoredWord);
+        if (state.censoredWords[0] === "") {
+            state.censoredWords = [censoredWord];
+        }
+        else {
+            state.censoredWords.push(censoredWord);
+        }
       },
       removeCensoredWord(state, censoredWord) {
         const index = state.censoredWords.indexOf(censoredWord);
         if (index > -1) {
-            console.log("remove");
             state.censoredWords.splice(index, 1);
         }
     },

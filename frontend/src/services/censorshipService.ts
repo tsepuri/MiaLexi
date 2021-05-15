@@ -14,7 +14,6 @@ export const CensorshipService = {
     const result:number = await api.post('/censorship/remove', {
         username, censoredWord
     })
-    console.log(result);
     return result > 0;
   },
 
@@ -24,7 +23,7 @@ export const CensorshipService = {
   },
 
   async addListToStore() {
-    if (store.getters.censoredWords.length === 0) {
+    if (store.getters.censoredWords.length === 0 || store.getters.censoredWords[0] === '') {
         const censoredList:string[] = await CensorshipService.getList(store.getters.username);
         store.commit('setCensoredWords', censoredList);
       }

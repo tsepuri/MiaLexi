@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin
 @RequestMapping("/PracticeFile")
 public class PracticeFileController {
 

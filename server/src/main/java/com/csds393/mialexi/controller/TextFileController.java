@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.LinkedList;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin
 @RequestMapping("/textFile")
 public class TextFileController {
 

@@ -65,9 +65,7 @@ export default defineComponent({
     const addNewWord = async() => {
       state.removeWork = true;
       state.addWork = await CensorshipService.add(store.getters.username, state.newWord);
-      console.log(state.addWork);
       if (state.addWork) {
-        console.log("here");
         store.commit('addCensoredWord', state.newWord);
         state.newWord = '';
         state.inputting = false;
@@ -77,7 +75,6 @@ export default defineComponent({
       state.addWork = true;
       if (state.activeIndex !== -1) {
         let word = state.censoredList[state.activeIndex]
-        console.log(word);
         state.removeWork = await CensorshipService.remove(store.getters.username, word);
         state.activeIndex = -1;
         store.commit('removeCensoredWord', word);
@@ -87,7 +84,6 @@ export default defineComponent({
       }
     }
     const wordPressed = (index:number) => {
-      console.log(index);
       if (state.activeIndex === index) {
         state.activeIndex = -1;
       }

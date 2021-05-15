@@ -106,7 +106,6 @@ export default defineComponent({
       fileTooBig: false
     });
     const titlePressed = (index:number) => {
-      console.log(index);
       if (state.activeIndex === index) {
         state.activeIndex = -1;
       }
@@ -122,9 +121,7 @@ export default defineComponent({
         state.paused = true;
         state.text = '';
         const result = await TextService.getContent(state.title);
-        console.log(result);
         state.text = result.fileContent;
-        console.log(state.text);
         state.count = result.index;
         state.count -= 1;
         state.activeIndex = -1;
@@ -133,10 +130,10 @@ export default defineComponent({
        
     }
     onMounted(async () => {
-          if (state.savedList[0] == "") {
+          if (state.savedList[0] === "" || state.savedList.length === 0) {
             await TextService.addListToStore();
           }
-          if (state.loggedIn && state.savedList.length > 0) {
+          if (state.loggedIn && state.savedList[0] != "" && state.savedList.length > 0) {
               state.textInput = true;
           }
       });
@@ -149,7 +146,6 @@ export default defineComponent({
            if(!state.paused && !state.startedOver && state.count > -1) {
              // done = true when the end of array reached
           state.word = state.textArray[++state.count]; // concatenate word to the string
-          console.log(state.word);
         }
         else {
               state.startedOver = false;
@@ -202,8 +198,6 @@ export default defineComponent({
       }
       else if (state.selectingFile) {
         if (state.file !== null) {
-          console.log("here")
-          console.log(state.file);
           state.text = await TextService.fileInput(state.file || '');
           textReceived = true;
           if (state.file !== null) {
@@ -228,11 +222,9 @@ export default defineComponent({
       if (textReceived) {
         await TextService.addListToStore();
         state.textInput = true;
-        state.textArray = state.text.split(" ");
+        state.textArray = state.text.replace(/\s\s+/g," ").split( " " );
         if (store.getters.censorWords) {
           let censoredWords = store.getters.censoredWords;
-          console.log(state.textArray);
-          console.log(censoredWords);
           let newArr = [];
           for (let word of state.textArray) {
             for (let censor of censoredWords) {
@@ -242,7 +234,6 @@ export default defineComponent({
             }
             newArr.push(word);
           }
-        console.log(newArr);
         state.textArray = newArr;
         }
         state.word = state.textArray[++state.count];
@@ -281,7 +272,6 @@ export default defineComponent({
         state.saveLoggedOut = true;
       }
       else if (!state.savedList.includes(state.title)) {
-        console.log(state.text);
         try {
         await TextService.save(state.title, state.count, state.text);
         store.commit('addToSavedTitles', state.title);
