@@ -7,6 +7,7 @@ Allows you to focus on one word at a time while reading by only showing you one 
  The purpose of this website is to enhance the user’s reading speed by displaying one word at a time, allowing the user to not only focus better when reading but also to prevent getting lost in the page. MiaLexi allows the user to choose how fast they would like to read. This website is also geared for educational purposes and children, since MiaLexi also allows censorship of certain words that the user would not want to see. MiaLexi will contain an authentication feature in order to keep track of the readings for the user. This website can be used for improving reading speed, while also having the ability to censor words that they deem inappropriate. The goal of this website is to allow the user to improve their reading speed, while our main objective with MiaLexi is to have it more accessible for users and schools. MiaLexi can run on any browser on a PC.
 
 ## Getting Started
+[MiaLexi](http://mialexi.herokuapp.com/)
 
 ### Dependencies
 
@@ -35,10 +36,20 @@ cd ../server
 ```
 * Open localhost:8080 on chrome
 
+
 ## Help
 
-Any advise for common problems or issues.
-* Everything is easier when you make an account
+* Implementation code in folder named MiaLexi
+* Find frontend testing at frontend/tests/unit
+
+```
+cd frontend
+npm run test:unit
+```
+
+* Find backend testing at server/src/test
+
+
 
 ## Authors
 
@@ -50,6 +61,9 @@ Contributors names and contact info
 * [Eunseo Choo](https://www.github.com/eschoo)
 * [Will Haskey](https://www.github.com/whaskey)
 * [Hunter Welch](https://www.github.com/hwelch)
+
+
+
 
 
 ## Acknowledgments
