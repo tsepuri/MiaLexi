@@ -1,10 +1,10 @@
 # MiaLexi
 
-Allows you to focus on one word at a time while reading by only showing you one word at a time
+Focus on one word at a time while reading 
 
 ## Description
 
- The purpose of this website is to enhance the user’s reading speed by displaying one word at a time, allowing the user to not only focus better when reading but also to prevent getting lost in the page. MiaLexi allows the user to choose how fast they would like to read. This website is also geared for educational purposes and children, since MiaLexi also allows censorship of certain words that the user would not want to see. MiaLexi will contain an authentication feature in order to keep track of the readings for the user. This website can be used for improving reading speed, while also having the ability to censor words that they deem inappropriate. The goal of this website is to allow the user to improve their reading speed, while our main objective with MiaLexi is to have it more accessible for users and schools. MiaLexi can run on any browser on a PC.
+The purpose of this website is to enhance the user’s reading speed by displaying one word at a time, allowing the user to not only focus better when reading but also to prevent getting lost in the page. MiaLexi allows the user to choose how fast they would like to read. This website is also geared for educational purposes and children, since MiaLexi also allows censorship of certain words that the user would not want to see. MiaLexi will contain an authentication feature in order to keep track of the readings for the user. This website can be used for improving reading speed, while also having the ability to censor words that they deem inappropriate. The goal of this website is to allow the user to improve their reading speed, while our main objective with MiaLexi is to have it more accessible for users and schools. MiaLexi can run on any browser on a PC or laptop.
 
 ## Getting Started
 [MiaLexi](http://mialexi.herokuapp.com/)
@@ -23,10 +23,7 @@ Allows you to focus on one word at a time while reading by only showing you one 
 cd Mia-Lexi
 cd frontend
 npm install
-
 ```
-
-
 ### Executing program
 
 ```
@@ -39,7 +36,6 @@ cd ../server
 
 ## Help
 
-* Implementation code in folder named MiaLexi
 * Find frontend testing at frontend/tests/unit
 
 ```
@@ -54,7 +50,6 @@ npm run test:unit
 * If you use the supplied url you can access full practice mode
 
 
-
 ## Authors
 
 Contributors names and contact info
@@ -67,10 +62,7 @@ Contributors names and contact info
 * [Hunter Welch](https://www.github.com/hwelch)
 
 
-
-
-
 ## Acknowledgments
 
-Qinyong Wang
-Professor Xiao
+* Qinyong Wang 
+* Professor Xiao
